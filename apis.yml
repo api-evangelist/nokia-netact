@@ -16,3 +16,12 @@ apis:
     type: Documentation
   description: >-
     Nokia NetAct and Ericsson OSS provide network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure.
+common:
+- url: https://www.nokia.com/
+  type: Portal
+- url: https://www.nokia.com/
+  type: Website
+maintainer:
+  name: Kin Lane
+  email: kin@apievangelist.com
+modified: '2026-03-18'
