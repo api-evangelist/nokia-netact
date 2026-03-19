@@ -1,0 +1,549 @@
+openapi: 3.1.0
+info:
+  title: Nokia NetAct Network Management Northbound Interface API
+  description: >-
+    Nokia NetAct provides network element management APIs for telecom operators.
+    APIs enable network topology discovery, performance monitoring, fault management,
+    and configuration management across RAN, transport, and core network infrastructure.
+    The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.
+  version: 22.0.0
+  contact:
+    name: Nokia Networks Support
+    url: https://www.nokia.com/networks/support/
+  license:
+    name: Proprietary
+    url: https://www.nokia.com/
+externalDocs:
+  description: Nokia NetAct Documentation
+  url: https://www.nokia.com/networks/products/netact/
+servers:
+  - url: https://{netact-host}/api/v1
+    variables:
+      netact-host:
+        default: netact.example.com
+        description: Nokia NetAct server hostname
+security:
+  - BearerAuth: []
+  - BasicAuth: []
+paths:
+  /topology/network-elements:
+    get:
+      operationId: listNetworkElements
+      summary: List network elements
+      description: >-
+        Retrieve a list of managed network elements (NEs) including base stations,
+        radio units, core nodes, and transport equipment. Supports filtering by
+        element type, vendor, technology, and operational state.
+      tags:
+        - Topology
+      parameters:
+        - name: neType
+          in: query
+          schema:
+            type: string
+          description: Network element type (e.g., BTS, NodeB, eNodeB, gNodeB, BSC, RNC, MSC)
+        - name: technology
+          in: query
+          schema:
+            type: string
+            enum: [2G, 3G, 4G, 5G, TRANSPORT, CORE]
+        - name: vendor
+          in: query
+          schema:
+            type: string
+          description: Network equipment vendor name
+        - name: operationalState
+          in: query
+          schema:
+            type: string
+            enum: [ENABLED, DISABLED, UNKNOWN]
+        - name: administrativeState
+          in: query
+          schema:
+            type: string
+            enum: [LOCKED, UNLOCKED, SHUTTINGDOWN]
+        - name: alarmState
+          in: query
+          schema:
+            type: string
+            enum: [CLEAR, WARNING, MINOR, MAJOR, CRITICAL]
+        - name: dnFilter
+          in: query
+          schema:
+            type: string
+          description: Distinguished Name prefix filter for topology subtree queries
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            maximum: 5000
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of network elements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkElementListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /topology/network-elements/{distinguishedName}:
+    get:
+      operationId: getNetworkElement
+      summary: Get network element details
+      description: >-
+        Retrieve full details of a specific network element by its Distinguished
+        Name (DN) including managed object attributes, alarms, and KPI summary.
+      tags:
+        - Topology
+      parameters:
+        - name: distinguishedName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: DN of the network element (URL-encoded)
+          example: PLMN-PLMN/BSC-1/BTS-100
+      responses:
+        '200':
+          description: Network element details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkElement'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /topology/network-elements/{distinguishedName}/children:
+    get:
+      operationId: getNetworkElementChildren
+      summary: Get child network elements
+      description: >-
+        Retrieve the direct children of a network element in the managed object
+        tree (e.g., cells under a base station, boards under an NE).
+      tags:
+        - Topology
+      parameters:
+        - name: distinguishedName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: childClass
+          in: query
+          schema:
+            type: string
+          description: Filter by specific MO class name (e.g., LNCEL, WCEL, GCELL)
+      responses:
+        '200':
+          description: Child NEs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkElementListResponse'
+  /faults/alarms:
+    get:
+      operationId: listActiveAlarms
+      summary: List active alarms
+      description: >-
+        Retrieve currently active alarms from managed network elements.
+        Supports filtering by severity, network element, alarm type, and time range.
+      tags:
+        - Fault Management
+      parameters:
+        - name: severity
+          in: query
+          schema:
+            type: string
+            enum: [CRITICAL, MAJOR, MINOR, WARNING, INDETERMINATE]
+        - name: neDn
+          in: query
+          schema:
+            type: string
+          description: Distinguished Name of the source NE
+        - name: alarmType
+          in: query
+          schema:
+            type: string
+            enum: [COMMUNICATION_ALARM, EQUIPMENT_ALARM, PROCESSING_ERROR, QUALITY_OF_SERVICE, ENVIRONMENTAL]
+        - name: fromTime
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 200
+            maximum: 10000
+      responses:
+        '200':
+          description: Active alarms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlarmListResponse'
+  /faults/alarms/{alarmId}:
+    get:
+      operationId: getAlarm
+      summary: Get alarm details
+      description: Retrieve full details of a specific alarm by ID.
+      tags:
+        - Fault Management
+      parameters:
+        - name: alarmId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Alarm details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faults/alarms/{alarmId}/acknowledge:
+    post:
+      operationId: acknowledgeAlarm
+      summary: Acknowledge an alarm
+      description: Acknowledge an active alarm, optionally adding a comment.
+      tags:
+        - Fault Management
+      parameters:
+        - name: alarmId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  maxLength: 512
+                acknowledgedBy:
+                  type: string
+      responses:
+        '200':
+          description: Alarm acknowledged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+  /performance/kpis:
+    get:
+      operationId: getPerformanceKPIs
+      summary: Get KPI performance counters
+      description: >-
+        Retrieve performance measurement (PM) counter values and derived KPIs
+        for network elements. Supports filtering by NE, KPI group, and time
+        granularity (15-min, 1-hour, daily).
+      tags:
+        - Performance Management
+      parameters:
+        - name: neDn
+          in: query
+          required: true
+          schema:
+            type: string
+          description: DN of the network element or subtree root
+        - name: kpiGroup
+          in: query
+          schema:
+            type: string
+          description: KPI group name (e.g., ACCESSIBILITY, RETAINABILITY, TRAFFIC)
+        - name: granularity
+          in: query
+          schema:
+            type: string
+            enum: [PT15M, PT1H, P1D]
+            default: PT1H
+          description: Measurement granularity (ISO 8601 duration)
+        - name: startTime
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: KPI measurement results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KPIResultResponse'
+  /configuration/network-elements/{distinguishedName}/attributes:
+    get:
+      operationId: getNetworkElementAttributes
+      summary: Get managed object attributes
+      description: >-
+        Read current configuration parameter values (MO attributes) for a
+        network element. Used for configuration verification and auditing.
+      tags:
+        - Configuration Management
+      parameters:
+        - name: distinguishedName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: attributes
+          in: query
+          schema:
+            type: string
+          description: Comma-separated list of attribute names to retrieve (all if omitted)
+      responses:
+        '200':
+          description: MO attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MOAttributesResponse'
+    patch:
+      operationId: updateNetworkElementAttributes
+      summary: Modify managed object attributes
+      description: >-
+        Apply configuration changes to a network element by modifying MO attributes.
+        All changes are logged in the NetAct audit trail.
+      tags:
+        - Configuration Management
+      parameters:
+        - name: distinguishedName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MOAttributeUpdate'
+      responses:
+        '200':
+          description: Attributes updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MOAttributesResponse'
+        '409':
+          description: Conflict — NE locked by another session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    BasicAuth:
+      type: http
+      scheme: basic
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Network element not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    NetworkElement:
+      type: object
+      description: A managed network element in the Nokia NetAct topology
+      properties:
+        distinguishedName:
+          type: string
+          description: X.711 Distinguished Name (DN) uniquely identifying the NE
+        neType:
+          type: string
+          description: Managed object class name (e.g., BTS, LNBTS, GNODEB)
+        technology:
+          type: string
+          enum: [2G, 3G, 4G, 5G, TRANSPORT, CORE]
+        vendor:
+          type: string
+        softwareVersion:
+          type: string
+        operationalState:
+          type: string
+          enum: [ENABLED, DISABLED, UNKNOWN]
+        administrativeState:
+          type: string
+          enum: [LOCKED, UNLOCKED, SHUTTINGDOWN]
+        alarmState:
+          type: string
+          enum: [CLEAR, WARNING, MINOR, MAJOR, CRITICAL]
+        ipAddress:
+          type: string
+          format: ipv4
+        location:
+          type: object
+          properties:
+            latitude: { type: number }
+            longitude: { type: number }
+            address: { type: string }
+            siteId: { type: string }
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Managed object attribute values
+    NetworkElementListResponse:
+      type: object
+      properties:
+        networkElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkElement'
+        totalCount:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+    Alarm:
+      type: object
+      properties:
+        alarmId:
+          type: string
+        neDn:
+          type: string
+          description: DN of the source network element
+        severity:
+          type: string
+          enum: [CRITICAL, MAJOR, MINOR, WARNING, INDETERMINATE, CLEARED]
+        alarmType:
+          type: string
+          enum: [COMMUNICATION_ALARM, EQUIPMENT_ALARM, PROCESSING_ERROR, QUALITY_OF_SERVICE, ENVIRONMENTAL]
+        probableCause:
+          type: integer
+          description: X.733 probable cause code
+        specificProblem:
+          type: string
+          description: Vendor-specific problem description
+        additionalText:
+          type: string
+        raisedTime:
+          type: string
+          format: date-time
+        clearedTime:
+          type: string
+          format: date-time
+        acknowledgedTime:
+          type: string
+          format: date-time
+        acknowledgedBy:
+          type: string
+        technology:
+          type: string
+          enum: [2G, 3G, 4G, 5G, TRANSPORT, CORE]
+    AlarmListResponse:
+      type: object
+      properties:
+        alarms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alarm'
+        totalCount:
+          type: integer
+    KPIResult:
+      type: object
+      properties:
+        neDn:
+          type: string
+        kpiName:
+          type: string
+        kpiGroup:
+          type: string
+        granularity:
+          type: string
+        measurements:
+          type: array
+          items:
+            type: object
+            properties:
+              startTime:
+                type: string
+                format: date-time
+              endTime:
+                type: string
+                format: date-time
+              value:
+                type: number
+              unit:
+                type: string
+    KPIResultResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/KPIResult'
+        queryStartTime:
+          type: string
+          format: date-time
+        queryEndTime:
+          type: string
+          format: date-time
+    MOAttributesResponse:
+      type: object
+      properties:
+        distinguishedName:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+          description: MO attribute name-value pairs
+    MOAttributeUpdate:
+      type: object
+      required:
+        - attributes
+      properties:
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Attribute names and new values to set
+        reason:
+          type: string
+          description: Change reason for audit trail
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+tags:
+  - name: Topology
+    description: Network topology discovery and navigation
+  - name: Fault Management
+    description: Alarm monitoring and lifecycle management
+  - name: Performance Management
+    description: KPI and PM counter retrieval
+  - name: Configuration Management
+    description: Network element configuration read and write

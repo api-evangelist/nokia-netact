@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json",
+  "title": "Nokia NetAct Network Element",
+  "description": "A managed network element in the Nokia NetAct OSS topology (ITU-T X.700 NE)",
+  "type": "object",
+  "required": ["distinguishedName", "neType"],
+  "properties": {
+    "distinguishedName": {
+      "type": "string",
+      "description": "X.711 Distinguished Name uniquely identifying the NE in the managed object tree"
+    },
+    "neType": {
+      "type": "string",
+      "description": "Managed object class (e.g., BTS, LNBTS, GNODEB, MSC, RNC, BSC)"
+    },
+    "technology": {
+      "type": "string",
+      "enum": ["2G", "3G", "4G", "5G", "TRANSPORT", "CORE"],
+      "description": "Radio access or core technology generation"
+    },
+    "vendor": {
+      "type": "string",
+      "description": "Network equipment vendor"
+    },
+    "softwareVersion": {
+      "type": "string"
+    },
+    "operationalState": {
+      "type": "string",
+      "enum": ["ENABLED", "DISABLED", "UNKNOWN"],
+      "description": "ITU-T X.731 operational state"
+    },
+    "administrativeState": {
+      "type": "string",
+      "enum": ["LOCKED", "UNLOCKED", "SHUTTINGDOWN"],
+      "description": "ITU-T X.731 administrative state"
+    },
+    "alarmState": {
+      "type": "string",
+      "enum": ["CLEAR", "WARNING", "MINOR", "MAJOR", "CRITICAL"],
+      "description": "Derived from active alarms on this NE"
+    },
+    "ipAddress": {
+      "type": "string",
+      "format": "ipv4",
+      "description": "Management IP address"
+    },
+    "location": {
+      "$ref": "#/$defs/NetworkLocation"
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Technology-specific managed object attribute values"
+    }
+  },
+  "$defs": {
+    "NetworkLocation": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "address": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string",
+          "description": "Physical site identifier"
+        },
+        "siteName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

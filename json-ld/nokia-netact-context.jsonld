@@ -1,0 +1,74 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "netact": "https://www.nokia.com/ontology/netact/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "NetworkElement": "schema:Place",
+    "distinguishedName": "schema:identifier",
+    "neType": {
+      "@id": "netact:neType",
+      "@type": "xsd:string"
+    },
+    "technology": {
+      "@id": "netact:technology",
+      "@type": "xsd:string"
+    },
+    "vendor": {
+      "@id": "schema:brand",
+      "@type": "xsd:string"
+    },
+    "softwareVersion": {
+      "@id": "schema:softwareVersion",
+      "@type": "xsd:string"
+    },
+    "operationalState": {
+      "@id": "netact:operationalState",
+      "@type": "xsd:string"
+    },
+    "administrativeState": {
+      "@id": "netact:administrativeState",
+      "@type": "xsd:string"
+    },
+    "alarmState": {
+      "@id": "netact:alarmState",
+      "@type": "xsd:string"
+    },
+    "ipAddress": {
+      "@id": "schema:ipAddressOfServer",
+      "@type": "xsd:string"
+    },
+    "location": "schema:location",
+    "latitude": {
+      "@id": "geo:lat",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "geo:long",
+      "@type": "xsd:decimal"
+    },
+    "address": "schema:address",
+    "siteId": "schema:identifier",
+    "Alarm": "schema:Warning",
+    "alarmId": "schema:identifier",
+    "severity": {
+      "@id": "netact:alarmSeverity",
+      "@type": "xsd:string"
+    },
+    "alarmType": {
+      "@id": "netact:alarmType",
+      "@type": "xsd:string"
+    },
+    "specificProblem": "schema:description",
+    "raisedTime": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "clearedTime": {
+      "@id": "schema:endDate",
+      "@type": "xsd:dateTime"
+    }
+  }
+}
