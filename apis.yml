@@ -1,29 +1,24 @@
 aid: nokia-netact
-url: 
-  https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/apis.yml
 apis:
   - aid: nokia-netact:nokia-netact-api
     name: Nokia NetAct / Ericsson OSS API
     tags:
-      - Telecom
       - Network Management
       - OSS
       - SNMP
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/image.png
+      - Telecom
+    image: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/image.png
     humanURL: https://www.nokia.com/
     baseURL: https://api.nokia-netact.example.com
     properties:
       - url: https://www.nokia.com/
         type: Documentation
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/openapi/nokia-netact-nbi-openapi.yml
+      - url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/openapi/nokia-netact-nbi-openapi.yml
         type: OpenAPI
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
+      - url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
         type: JSONSchema
-      - url: 
-          https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
+      - url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
         type: JSONLDContext
     description: >-
       Nokia NetAct and Ericsson OSS provide network element management APIs for telecom
@@ -35,14 +30,11 @@ common:
     type: Portal
   - url: https://www.nokia.com/
     type: Website
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/openapi/nokia-netact-nbi-openapi.yml
+  - url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/openapi/nokia-netact-nbi-openapi.yml
     type: OpenAPI
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
+  - url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
     type: JSONSchema
-  - url: 
-      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
+  - url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
     type: JSONLDContext
 maintainer:
   name: Kin Lane

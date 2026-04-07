@@ -403,10 +403,10 @@ components:
         location:
           type: object
           properties:
-            latitude: { type: number }
-            longitude: { type: number }
-            address: { type: string }
-            siteId: { type: string }
+            latitude: {type: number}
+            longitude: {type: number}
+            address: {type: string}
+            siteId: {type: string}
         attributes:
           type: object
           additionalProperties: true
@@ -539,11 +539,11 @@ components:
         details:
           type: string
 tags:
-  - name: Topology
-    description: Network topology discovery and navigation
+  - name: Configuration Management
+    description: Network element configuration read and write
   - name: Fault Management
     description: Alarm monitoring and lifecycle management
   - name: Performance Management
     description: KPI and PM counter retrieval
-  - name: Configuration Management
-    description: Network element configuration read and write
+  - name: Topology
+    description: Network topology discovery and navigation
