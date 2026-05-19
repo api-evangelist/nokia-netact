@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nokia NetAct Network Management Northbound Interface API — Performance Management
+  description: 'Nokia NetAct Network Management Northbound Interface API — Performance Management. 1 operations. Lead operation:
+    Get KPI performance counters. Self-contained Naftiko capability covering one Nokia Netact business surface.'
+  tags:
+  - Nokia Netact
+  - Performance Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NOKIA_NETACT_API_KEY: NOKIA_NETACT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: nbi-performance-management
+    baseUri: https://{netact-host}/api/v1
+    description: Nokia NetAct Network Management Northbound Interface API — Performance Management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: performance-kpis
+      path: /performance/kpis
+      operations:
+      - name: getperformancekpis
+        method: GET
+        description: Get KPI performance counters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: neDn
+          in: query
+          type: string
+          description: DN of the network element or subtree root
+          required: true
+        - name: kpiGroup
+          in: query
+          type: string
+          description: KPI group name (e.g., ACCESSIBILITY, RETAINABILITY, TRAFFIC)
+        - name: granularity
+          in: query
+          type: string
+          description: Measurement granularity (ISO 8601 duration)
+        - name: startTime
+          in: query
+          type: string
+          required: true
+        - name: endTime
+          in: query
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NOKIA_NETACT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: nbi-performance-management-rest
+    port: 8080
+    description: REST adapter for Nokia NetAct Network Management Northbound Interface API — Performance Management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/performance/kpis
+      name: performance-kpis
+      description: REST surface for performance-kpis.
+      operations:
+      - method: GET
+        name: getperformancekpis
+        description: Get KPI performance counters
+        call: nbi-performance-management.getperformancekpis
+        with:
+          neDn: rest.neDn
+          kpiGroup: rest.kpiGroup
+          granularity: rest.granularity
+          startTime: rest.startTime
+          endTime: rest.endTime
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: nbi-performance-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Nokia NetAct Network Management Northbound Interface API — Performance Management. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-kpi-performance-counters
+      description: Get KPI performance counters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nbi-performance-management.getperformancekpis
+      with:
+        neDn: tools.neDn
+        kpiGroup: tools.kpiGroup
+        granularity: tools.granularity
+        startTime: tools.startTime
+        endTime: tools.endTime
+      outputParameters:
+      - type: object
+        mapping: $.

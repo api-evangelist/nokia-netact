@@ -1,0 +1,211 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nokia NetAct Network Management Northbound Interface API — Topology
+  description: 'Nokia NetAct Network Management Northbound Interface API — Topology. 3 operations. Lead operation: List network
+    elements. Self-contained Naftiko capability covering one Nokia Netact business surface.'
+  tags:
+  - Nokia Netact
+  - Topology
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NOKIA_NETACT_API_KEY: NOKIA_NETACT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: nbi-topology
+    baseUri: https://{netact-host}/api/v1
+    description: Nokia NetAct Network Management Northbound Interface API — Topology business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: topology-network-elements
+      path: /topology/network-elements
+      operations:
+      - name: listnetworkelements
+        method: GET
+        description: List network elements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: neType
+          in: query
+          type: string
+          description: Network element type (e.g., BTS, NodeB, eNodeB, gNodeB, BSC, RNC, MSC)
+        - name: technology
+          in: query
+          type: string
+        - name: vendor
+          in: query
+          type: string
+          description: Network equipment vendor name
+        - name: operationalState
+          in: query
+          type: string
+        - name: administrativeState
+          in: query
+          type: string
+        - name: alarmState
+          in: query
+          type: string
+        - name: dnFilter
+          in: query
+          type: string
+          description: Distinguished Name prefix filter for topology subtree queries
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+    - name: topology-network-elements-distinguishedName
+      path: /topology/network-elements/{distinguishedName}
+      operations:
+      - name: getnetworkelement
+        method: GET
+        description: Get network element details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: distinguishedName
+          in: path
+          type: string
+          description: DN of the network element (URL-encoded)
+          required: true
+    - name: topology-network-elements-distinguishedName-children
+      path: /topology/network-elements/{distinguishedName}/children
+      operations:
+      - name: getnetworkelementchildren
+        method: GET
+        description: Get child network elements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: distinguishedName
+          in: path
+          type: string
+          required: true
+        - name: childClass
+          in: query
+          type: string
+          description: Filter by specific MO class name (e.g., LNCEL, WCEL, GCELL)
+    authentication:
+      type: bearer
+      token: '{{env.NOKIA_NETACT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: nbi-topology-rest
+    port: 8080
+    description: REST adapter for Nokia NetAct Network Management Northbound Interface API — Topology. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/topology/network-elements
+      name: topology-network-elements
+      description: REST surface for topology-network-elements.
+      operations:
+      - method: GET
+        name: listnetworkelements
+        description: List network elements
+        call: nbi-topology.listnetworkelements
+        with:
+          neType: rest.neType
+          technology: rest.technology
+          vendor: rest.vendor
+          operationalState: rest.operationalState
+          administrativeState: rest.administrativeState
+          alarmState: rest.alarmState
+          dnFilter: rest.dnFilter
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/topology/network-elements/{distinguishedname}
+      name: topology-network-elements-distinguishedname
+      description: REST surface for topology-network-elements-distinguishedName.
+      operations:
+      - method: GET
+        name: getnetworkelement
+        description: Get network element details
+        call: nbi-topology.getnetworkelement
+        with:
+          distinguishedName: rest.distinguishedName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/topology/network-elements/{distinguishedname}/children
+      name: topology-network-elements-distinguishedname-children
+      description: REST surface for topology-network-elements-distinguishedName-children.
+      operations:
+      - method: GET
+        name: getnetworkelementchildren
+        description: Get child network elements
+        call: nbi-topology.getnetworkelementchildren
+        with:
+          distinguishedName: rest.distinguishedName
+          childClass: rest.childClass
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: nbi-topology-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Nokia NetAct Network Management Northbound Interface API — Topology. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-network-elements
+      description: List network elements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nbi-topology.listnetworkelements
+      with:
+        neType: tools.neType
+        technology: tools.technology
+        vendor: tools.vendor
+        operationalState: tools.operationalState
+        administrativeState: tools.administrativeState
+        alarmState: tools.alarmState
+        dnFilter: tools.dnFilter
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-element-details
+      description: Get network element details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nbi-topology.getnetworkelement
+      with:
+        distinguishedName: tools.distinguishedName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-child-network-elements
+      description: Get child network elements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nbi-topology.getnetworkelementchildren
+      with:
+        distinguishedName: tools.distinguishedName
+        childClass: tools.childClass
+      outputParameters:
+      - type: object
+        mapping: $.
