@@ -1,0 +1,318 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nokia NetAct Network Management Northbound Interface API",
+    "version": "22.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Topology",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List network elements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/topology/network-elements",
+            "params": [
+              {
+                "name": "neType",
+                "value": "",
+                "type": "query",
+                "description": "Network element type (e.g., BTS, NodeB, eNodeB, gNodeB, BSC, RNC, MSC)"
+              },
+              {
+                "name": "technology",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "vendor",
+                "value": "",
+                "type": "query",
+                "description": "Network equipment vendor name"
+              },
+              {
+                "name": "operationalState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "administrativeState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "alarmState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dnFilter",
+                "value": "",
+                "type": "query",
+                "description": "Distinguished Name prefix filter for topology subtree queries"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of managed network elements (NEs) including base stations, radio units, core nodes, and transport equipment. Supports filtering by element type, vendor, technology, and operational state."
+        },
+        {
+          "info": {
+            "name": "Get network element details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/topology/network-elements/:distinguishedName",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "PLMN-PLMN/BSC-1/BTS-100",
+                "type": "path",
+                "description": "DN of the network element (URL-encoded)"
+              }
+            ]
+          },
+          "docs": "Retrieve full details of a specific network element by its Distinguished Name (DN) including managed object attributes, alarms, and KPI summary."
+        },
+        {
+          "info": {
+            "name": "Get child network elements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/topology/network-elements/:distinguishedName/children",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "childClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific MO class name (e.g., LNCEL, WCEL, GCELL)"
+              }
+            ]
+          },
+          "docs": "Retrieve the direct children of a network element in the managed object tree (e.g., cells under a base station, boards under an NE)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fault Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List active alarms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/faults/alarms",
+            "params": [
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "neDn",
+                "value": "",
+                "type": "query",
+                "description": "Distinguished Name of the source NE"
+              },
+              {
+                "name": "alarmType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve currently active alarms from managed network elements. Supports filtering by severity, network element, alarm type, and time range."
+        },
+        {
+          "info": {
+            "name": "Get alarm details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/faults/alarms/:alarmId",
+            "params": [
+              {
+                "name": "alarmId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve full details of a specific alarm by ID."
+        },
+        {
+          "info": {
+            "name": "Acknowledge an alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{netact-host}/api/v1/faults/alarms/:alarmId/acknowledge",
+            "params": [
+              {
+                "name": "alarmId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge an active alarm, optionally adding a comment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Performance Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get KPI performance counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/performance/kpis",
+            "params": [
+              {
+                "name": "neDn",
+                "value": "",
+                "type": "query",
+                "description": "DN of the network element or subtree root"
+              },
+              {
+                "name": "kpiGroup",
+                "value": "",
+                "type": "query",
+                "description": "KPI group name (e.g., ACCESSIBILITY, RETAINABILITY, TRAFFIC)"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Measurement granularity (ISO 8601 duration)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve performance measurement (PM) counter values and derived KPIs for network elements. Supports filtering by NE, KPI group, and time granularity (15-min, 1-hour, daily)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Configuration Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get managed object attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/configuration/network-elements/:distinguishedName/attributes",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to retrieve (all if omitted)"
+              }
+            ]
+          },
+          "docs": "Read current configuration parameter values (MO attributes) for a network element. Used for configuration verification and auditing."
+        },
+        {
+          "info": {
+            "name": "Modify managed object attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{netact-host}/api/v1/configuration/network-elements/:distinguishedName/attributes",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply configuration changes to a network element by modifying MO attributes. All changes are logged in the NetAct audit trail."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

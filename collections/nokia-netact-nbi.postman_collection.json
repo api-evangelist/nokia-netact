@@ -1,0 +1,1559 @@
+{
+  "item": [
+    {
+      "id": "435f8999-7f73-4c9a-b909-48f528672aa7",
+      "name": "Configuration Management",
+      "description": {
+        "content": "Network element configuration read and write",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b0f0dcb-d64b-4953-bcfe-a94b9529cf8e",
+          "name": "Get managed object attributes",
+          "request": {
+            "name": "Get managed object attributes",
+            "description": {
+              "content": "Read current configuration parameter values (MO attributes) for a network element. Used for configuration verification and auditing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "configuration",
+                "network-elements",
+                ":distinguishedName",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to retrieve (all if omitted)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distinguishedName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "274e4cfe-4016-4f9b-9eee-6b3ea9294cd5",
+              "name": "MO attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configuration",
+                    "network-elements",
+                    ":distinguishedName",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"distinguishedName\": \"string\",\n  \"attributes\": {\n    \"key_0\": 4673\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9093d0f3-fbe7-432f-9adf-a0f7075cf6a6",
+          "name": "Modify managed object attributes",
+          "request": {
+            "name": "Modify managed object attributes",
+            "description": {
+              "content": "Apply configuration changes to a network element by modifying MO attributes. All changes are logged in the NetAct audit trail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "configuration",
+                "network-elements",
+                ":distinguishedName",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distinguishedName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributes\": {\n    \"key_0\": 3275.268272563413,\n    \"key_1\": 865.5357909456229\n  },\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d31b1546-f4b5-4f91-8ddd-2c81fac99986",
+              "name": "Attributes updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configuration",
+                    "network-elements",
+                    ":distinguishedName",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": 538.2384129646234\n  },\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"distinguishedName\": \"string\",\n  \"attributes\": {\n    \"key_0\": 4673\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32ee3e93-01a5-462d-b8ab-cfaf244423de",
+              "name": "Conflict — NE locked by another session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configuration",
+                    "network-elements",
+                    ":distinguishedName",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": 538.2384129646234\n  },\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ea3d79d6-6027-4149-8185-b518fe6ffeda",
+      "name": "Fault Management",
+      "description": {
+        "content": "Alarm monitoring and lifecycle management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "681139b5-0364-4aae-b109-552bca891b47",
+          "name": "List active alarms",
+          "request": {
+            "name": "List active alarms",
+            "description": {
+              "content": "Retrieve currently active alarms from managed network elements. Supports filtering by severity, network element, alarm type, and time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "faults",
+                "alarms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "neDn",
+                  "value": "<string>",
+                  "description": "Distinguished Name of the source NE"
+                },
+                {
+                  "disabled": false,
+                  "key": "alarmType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromTime",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "200"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89805c15-1610-4d45-a1ef-397260671784",
+              "name": "Active alarms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "faults",
+                    "alarms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "neDn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alarmType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alarms\": [\n    {\n      \"alarmId\": \"string\",\n      \"neDn\": \"string\",\n      \"severity\": \"WARNING\",\n      \"alarmType\": \"EQUIPMENT_ALARM\",\n      \"probableCause\": 3552,\n      \"specificProblem\": \"string\",\n      \"additionalText\": \"string\",\n      \"raisedTime\": \"1991-07-23T07:42:10.950Z\",\n      \"clearedTime\": \"1983-12-06T15:52:32.779Z\",\n      \"acknowledgedTime\": \"1999-01-29T14:15:05.057Z\",\n      \"acknowledgedBy\": \"string\",\n      \"technology\": \"4G\"\n    },\n    {\n      \"alarmId\": \"string\",\n      \"neDn\": \"string\",\n      \"severity\": \"MAJOR\",\n      \"alarmType\": \"COMMUNICATION_ALARM\",\n      \"probableCause\": 6259,\n      \"specificProblem\": \"string\",\n      \"additionalText\": \"string\",\n      \"raisedTime\": \"2003-05-28T14:31:37.875Z\",\n      \"clearedTime\": \"1966-09-05T06:51:56.773Z\",\n      \"acknowledgedTime\": \"2016-04-18T08:29:04.676Z\",\n      \"acknowledgedBy\": \"string\",\n      \"technology\": \"4G\"\n    }\n  ],\n  \"totalCount\": 8836\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4550cf4c-c454-429d-91f9-4adaa31ba352",
+          "name": "Get alarm details",
+          "request": {
+            "name": "Get alarm details",
+            "description": {
+              "content": "Retrieve full details of a specific alarm by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "faults",
+                "alarms",
+                ":alarmId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alarmId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de1f5ac8-e890-472d-bfae-1a624e839e74",
+              "name": "Alarm details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "faults",
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alarmId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alarmId\": \"string\",\n  \"neDn\": \"string\",\n  \"severity\": \"MINOR\",\n  \"alarmType\": \"PROCESSING_ERROR\",\n  \"probableCause\": 9162,\n  \"specificProblem\": \"string\",\n  \"additionalText\": \"string\",\n  \"raisedTime\": \"1972-09-03T10:05:50.893Z\",\n  \"clearedTime\": \"1968-06-03T07:13:45.344Z\",\n  \"acknowledgedTime\": \"1989-06-08T18:06:19.369Z\",\n  \"acknowledgedBy\": \"string\",\n  \"technology\": \"3G\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "040f4fc6-c816-4594-a198-aace33900605",
+              "name": "Network element not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "faults",
+                    "alarms",
+                    ":alarmId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alarmId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7abf9f76-2d7f-4bd5-b6a4-03aa20dcf9c5",
+          "name": "Acknowledge an alarm",
+          "request": {
+            "name": "Acknowledge an alarm",
+            "description": {
+              "content": "Acknowledge an active alarm, optionally adding a comment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "faults",
+                "alarms",
+                ":alarmId",
+                "acknowledge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alarmId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"<string>\",\n  \"acknowledgedBy\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7bc5ed5f-7f7a-477b-801a-269cbfbd1411",
+              "name": "Alarm acknowledged",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "faults",
+                    "alarms",
+                    ":alarmId",
+                    "acknowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alarmId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment\": \"<string>\",\n  \"acknowledgedBy\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alarmId\": \"string\",\n  \"neDn\": \"string\",\n  \"severity\": \"MINOR\",\n  \"alarmType\": \"PROCESSING_ERROR\",\n  \"probableCause\": 9162,\n  \"specificProblem\": \"string\",\n  \"additionalText\": \"string\",\n  \"raisedTime\": \"1972-09-03T10:05:50.893Z\",\n  \"clearedTime\": \"1968-06-03T07:13:45.344Z\",\n  \"acknowledgedTime\": \"1989-06-08T18:06:19.369Z\",\n  \"acknowledgedBy\": \"string\",\n  \"technology\": \"3G\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3fd5862c-2342-41e6-b233-2e5f34ba7e8d",
+      "name": "Performance Management",
+      "description": {
+        "content": "KPI and PM counter retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c903d827-a66d-4e03-89b2-c23da7985745",
+          "name": "Get KPI performance counters",
+          "request": {
+            "name": "Get KPI performance counters",
+            "description": {
+              "content": "Retrieve performance measurement (PM) counter values and derived KPIs for network elements. Supports filtering by NE, KPI group, and time granularity (15-min, 1-hour, daily).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "performance",
+                "kpis"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "neDn",
+                  "value": "<string>",
+                  "description": "(Required) DN of the network element or subtree root"
+                },
+                {
+                  "disabled": false,
+                  "key": "kpiGroup",
+                  "value": "<string>",
+                  "description": "KPI group name (e.g., ACCESSIBILITY, RETAINABILITY, TRAFFIC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "PT1H",
+                  "description": "Measurement granularity (ISO 8601 duration)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d89bddee-d290-47f0-963d-2dd89c74e4ad",
+              "name": "KPI measurement results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "performance",
+                    "kpis"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "neDn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kpiGroup",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "PT1H"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"neDn\": \"string\",\n      \"kpiName\": \"string\",\n      \"kpiGroup\": \"string\",\n      \"granularity\": \"string\",\n      \"measurements\": [\n        {\n          \"startTime\": \"1972-11-08T17:38:48.772Z\",\n          \"endTime\": \"1981-01-01T15:04:55.542Z\",\n          \"value\": 1625.4167365023852,\n          \"unit\": \"string\"\n        },\n        {\n          \"startTime\": \"1958-05-12T02:59:26.600Z\",\n          \"endTime\": \"2003-08-24T20:13:41.975Z\",\n          \"value\": 1744.4142135375462,\n          \"unit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"neDn\": \"string\",\n      \"kpiName\": \"string\",\n      \"kpiGroup\": \"string\",\n      \"granularity\": \"string\",\n      \"measurements\": [\n        {\n          \"startTime\": \"1995-08-22T19:36:26.007Z\",\n          \"endTime\": \"1973-06-12T22:12:46.600Z\",\n          \"value\": 6249.262281296336,\n          \"unit\": \"string\"\n        },\n        {\n          \"startTime\": \"1951-03-16T04:02:16.866Z\",\n          \"endTime\": \"2010-08-08T21:54:22.325Z\",\n          \"value\": 7602.402071341874,\n          \"unit\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"queryStartTime\": \"1969-01-28T14:39:39.914Z\",\n  \"queryEndTime\": \"2007-08-12T16:08:00.533Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "442752c0-243b-45b7-ad13-562c1ce9cac1",
+      "name": "Topology",
+      "description": {
+        "content": "Network topology discovery and navigation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60783bfc-a8af-4c7c-b07e-c13de906be77",
+          "name": "List network elements",
+          "request": {
+            "name": "List network elements",
+            "description": {
+              "content": "Retrieve a list of managed network elements (NEs) including base stations, radio units, core nodes, and transport equipment. Supports filtering by element type, vendor, technology, and operational state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "topology",
+                "network-elements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "neType",
+                  "value": "<string>",
+                  "description": "Network element type (e.g., BTS, NodeB, eNodeB, gNodeB, BSC, RNC, MSC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "technology",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor",
+                  "value": "<string>",
+                  "description": "Network equipment vendor name"
+                },
+                {
+                  "disabled": false,
+                  "key": "operationalState",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "administrativeState",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "alarmState",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dnFilter",
+                  "value": "<string>",
+                  "description": "Distinguished Name prefix filter for topology subtree queries"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6accd0a7-b263-4d2a-801d-5da9b0512a61",
+              "name": "List of network elements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "topology",
+                    "network-elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "neType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "technology",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operationalState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "administrativeState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alarmState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dnFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"networkElements\": [\n    {\n      \"distinguishedName\": \"string\",\n      \"neType\": \"string\",\n      \"technology\": \"4G\",\n      \"vendor\": \"string\",\n      \"softwareVersion\": \"string\",\n      \"operationalState\": \"DISABLED\",\n      \"administrativeState\": \"UNLOCKED\",\n      \"alarmState\": \"CRITICAL\",\n      \"ipAddress\": \"69.254.30.37\",\n      \"location\": {\n        \"latitude\": 9131.021586393405,\n        \"longitude\": 8521.976014692214,\n        \"address\": \"string\",\n        \"siteId\": \"string\"\n      },\n      \"attributes\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"distinguishedName\": \"string\",\n      \"neType\": \"string\",\n      \"technology\": \"TRANSPORT\",\n      \"vendor\": \"string\",\n      \"softwareVersion\": \"string\",\n      \"operationalState\": \"DISABLED\",\n      \"administrativeState\": \"UNLOCKED\",\n      \"alarmState\": \"MAJOR\",\n      \"ipAddress\": \"182.28.204.164\",\n      \"location\": {\n        \"latitude\": 197.43586082333064,\n        \"longitude\": 6504.831831023905,\n        \"address\": \"string\",\n        \"siteId\": \"string\"\n      },\n      \"attributes\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9212.969099479082\n      }\n    }\n  ],\n  \"totalCount\": 681,\n  \"limit\": 6216,\n  \"offset\": 8127\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e359c85-c916-4944-8a2d-183ac5e6546f",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "topology",
+                    "network-elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "neType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "technology",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operationalState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "administrativeState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alarmState",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dnFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be812626-0db7-4051-9dbb-dd34ab4f2505",
+          "name": "Get network element details",
+          "request": {
+            "name": "Get network element details",
+            "description": {
+              "content": "Retrieve full details of a specific network element by its Distinguished Name (DN) including managed object attributes, alarms, and KPI summary.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "topology",
+                "network-elements",
+                ":distinguishedName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distinguishedName",
+                  "description": "(Required) DN of the network element (URL-encoded)"
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f147ebf6-9fab-4102-8d2b-9e7f4bfb1e4d",
+              "name": "Network element details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "topology",
+                    "network-elements",
+                    ":distinguishedName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) DN of the network element (URL-encoded)"
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"distinguishedName\": \"string\",\n  \"neType\": \"string\",\n  \"technology\": \"3G\",\n  \"vendor\": \"string\",\n  \"softwareVersion\": \"string\",\n  \"operationalState\": \"DISABLED\",\n  \"administrativeState\": \"SHUTTINGDOWN\",\n  \"alarmState\": \"MINOR\",\n  \"ipAddress\": \"98.73.191.175\",\n  \"location\": {\n    \"latitude\": 4787.7096907040695,\n    \"longitude\": 1441.8195269283717,\n    \"address\": \"string\",\n    \"siteId\": \"string\"\n  },\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": false,\n    \"key_2\": 5808.2725295029595\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "134d7433-a264-4b86-91e6-ab5748b0d450",
+              "name": "Network element not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "topology",
+                    "network-elements",
+                    ":distinguishedName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) DN of the network element (URL-encoded)"
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0658e141-4b62-4224-8edf-f81b5efdf388",
+          "name": "Get child network elements",
+          "request": {
+            "name": "Get child network elements",
+            "description": {
+              "content": "Retrieve the direct children of a network element in the managed object tree (e.g., cells under a base station, boards under an NE).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "topology",
+                "network-elements",
+                ":distinguishedName",
+                "children"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "childClass",
+                  "value": "<string>",
+                  "description": "Filter by specific MO class name (e.g., LNCEL, WCEL, GCELL)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distinguishedName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a6753bb-aaab-40e3-82de-0e22aa5ad2d8",
+              "name": "Child NEs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "topology",
+                    "network-elements",
+                    ":distinguishedName",
+                    "children"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "childClass",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"networkElements\": [\n    {\n      \"distinguishedName\": \"string\",\n      \"neType\": \"string\",\n      \"technology\": \"4G\",\n      \"vendor\": \"string\",\n      \"softwareVersion\": \"string\",\n      \"operationalState\": \"DISABLED\",\n      \"administrativeState\": \"UNLOCKED\",\n      \"alarmState\": \"CRITICAL\",\n      \"ipAddress\": \"69.254.30.37\",\n      \"location\": {\n        \"latitude\": 9131.021586393405,\n        \"longitude\": 8521.976014692214,\n        \"address\": \"string\",\n        \"siteId\": \"string\"\n      },\n      \"attributes\": {\n        \"key_0\": false\n      }\n    },\n    {\n      \"distinguishedName\": \"string\",\n      \"neType\": \"string\",\n      \"technology\": \"TRANSPORT\",\n      \"vendor\": \"string\",\n      \"softwareVersion\": \"string\",\n      \"operationalState\": \"DISABLED\",\n      \"administrativeState\": \"UNLOCKED\",\n      \"alarmState\": \"MAJOR\",\n      \"ipAddress\": \"182.28.204.164\",\n      \"location\": {\n        \"latitude\": 197.43586082333064,\n        \"longitude\": 6504.831831023905,\n        \"address\": \"string\",\n        \"siteId\": \"string\"\n      },\n      \"attributes\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9212.969099479082\n      }\n    }\n  ],\n  \"totalCount\": 681,\n  \"limit\": 6216,\n  \"offset\": 8127\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Nokia NetAct server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "netact.example.com",
+      "key": "netact-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{netact-host}}/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "449d31d6-2191-4a6e-ba4b-d653fdbea89a",
+    "name": "Nokia NetAct Network Management Northbound Interface API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.\n\nContact Support:\n Name: Nokia Networks Support",
+      "type": "text/plain"
+    }
+  }
+}
