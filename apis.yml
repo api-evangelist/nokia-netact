@@ -5,7 +5,7 @@ description: >-
   mobile networks across radio, transport, and core domains. The northbound interface exposes REST APIs for OSS/BSS
   integration including topology, performance, fault, and configuration management.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Network Management
   - OSS
