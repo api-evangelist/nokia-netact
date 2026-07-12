@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/nokia-netact-nbi-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/nokia-netact-nbi-openapi.yml
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/nokia-netact-nbi-openapi.yml

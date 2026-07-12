@@ -42,6 +42,12 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
 common:
+  - type: VulnerabilityDisclosure
+    url: security/nokia-netact-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/nokia-netact-domain-security.yml
+  - type: Authentication
+    url: authentication/nokia-netact-authentication.yml
   - type: Portal
     url: https://www.nokia.com/
   - type: Website
