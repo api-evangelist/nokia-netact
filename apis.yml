@@ -42,6 +42,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
 common:
+  - type: AgenticAccess
+    url: agentic-access/nokia-netact-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/nokia-netact-vulnerability-disclosure.yml
   - type: DomainSecurity
