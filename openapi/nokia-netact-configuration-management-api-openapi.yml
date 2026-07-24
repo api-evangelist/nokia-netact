@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Nokia NetAct Network Management Northbound Interface Configuration Management API
+  description: Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.
+  version: 22.0.0
+  contact:
+    name: Nokia Networks Support
+    url: https://www.nokia.com/networks/support/
+  license:
+    name: Proprietary
+    url: https://www.nokia.com/
+servers:
+- url: https://{netact-host}/api/v1
+  variables:
+    netact-host:
+      default: netact.example.com
+      description: Nokia NetAct server hostname
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Configuration Management
+  description: Network element configuration read and write
+paths:
+  /configuration/network-elements/{distinguishedName}/attributes:
+    get:
+      operationId: getNetworkElementAttributes
+      summary: Get managed object attributes
+      description: Read current configuration parameter values (MO attributes) for a network element. Used for configuration verification and auditing.
+      tags:
+      - Configuration Management
+      parameters:
+      - name: distinguishedName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attributes
+        in: query
+        schema:
+          type: string
+        description: Comma-separated list of attribute names to retrieve (all if omitted)
+      responses:
+        '200':
+          description: MO attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MOAttributesResponse'
+    patch:
+      operationId: updateNetworkElementAttributes
+      summary: Modify managed object attributes
+      description: Apply configuration changes to a network element by modifying MO attributes. All changes are logged in the NetAct audit trail.
+      tags:
+      - Configuration Management
+      parameters:
+      - name: distinguishedName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MOAttributeUpdate'
+      responses:
+        '200':
+          description: Attributes updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MOAttributesResponse'
+        '409':
+          description: Conflict — NE locked by another session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    MOAttributeUpdate:
+      type: object
+      required:
+      - attributes
+      properties:
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Attribute names and new values to set
+        reason:
+          type: string
+          description: Change reason for audit trail
+    MOAttributesResponse:
+      type: object
+      properties:
+        distinguishedName:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+          description: MO attribute name-value pairs
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    BasicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Nokia NetAct Documentation
+  url: https://www.nokia.com/networks/products/netact/

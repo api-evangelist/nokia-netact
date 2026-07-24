@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: Nokia NetAct Network Management Northbound Interface Configuration Management Topology API
+  description: Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.
+  version: 22.0.0
+  contact:
+    name: Nokia Networks Support
+    url: https://www.nokia.com/networks/support/
+  license:
+    name: Proprietary
+    url: https://www.nokia.com/
+servers:
+- url: https://{netact-host}/api/v1
+  variables:
+    netact-host:
+      default: netact.example.com
+      description: Nokia NetAct server hostname
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Topology
+  description: Network topology discovery and navigation
+paths:
+  /topology/network-elements:
+    get:
+      operationId: listNetworkElements
+      summary: List network elements
+      description: Retrieve a list of managed network elements (NEs) including base stations, radio units, core nodes, and transport equipment. Supports filtering by element type, vendor, technology, and operational state.
+      tags:
+      - Topology
+      parameters:
+      - name: neType
+        in: query
+        schema:
+          type: string
+        description: Network element type (e.g., BTS, NodeB, eNodeB, gNodeB, BSC, RNC, MSC)
+      - name: technology
+        in: query
+        schema:
+          type: string
+          enum:
+          - 2G
+          - 3G
+          - 4G
+          - 5G
+          - TRANSPORT
+          - CORE
+      - name: vendor
+        in: query
+        schema:
+          type: string
+        description: Network equipment vendor name
+      - name: operationalState
+        in: query
+        schema:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+          - UNKNOWN
+      - name: administrativeState
+        in: query
+        schema:
+          type: string
+          enum:
+          - LOCKED
+          - UNLOCKED
+          - SHUTTINGDOWN
+      - name: alarmState
+        in: query
+        schema:
+          type: string
+          enum:
+          - CLEAR
+          - WARNING
+          - MINOR
+          - MAJOR
+          - CRITICAL
+      - name: dnFilter
+        in: query
+        schema:
+          type: string
+        description: Distinguished Name prefix filter for topology subtree queries
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 100
+          maximum: 5000
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: List of network elements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkElementListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /topology/network-elements/{distinguishedName}:
+    get:
+      operationId: getNetworkElement
+      summary: Get network element details
+      description: Retrieve full details of a specific network element by its Distinguished Name (DN) including managed object attributes, alarms, and KPI summary.
+      tags:
+      - Topology
+      parameters:
+      - name: distinguishedName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: DN of the network element (URL-encoded)
+        example: PLMN-PLMN/BSC-1/BTS-100
+      responses:
+        '200':
+          description: Network element details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkElement'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /topology/network-elements/{distinguishedName}/children:
+    get:
+      operationId: getNetworkElementChildren
+      summary: Get child network elements
+      description: Retrieve the direct children of a network element in the managed object tree (e.g., cells under a base station, boards under an NE).
+      tags:
+      - Topology
+      parameters:
+      - name: distinguishedName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: childClass
+        in: query
+        schema:
+          type: string
+        description: Filter by specific MO class name (e.g., LNCEL, WCEL, GCELL)
+      responses:
+        '200':
+          description: Child NEs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkElementListResponse'
+components:
+  schemas:
+    NetworkElement:
+      type: object
+      description: A managed network element in the Nokia NetAct topology
+      properties:
+        distinguishedName:
+          type: string
+          description: X.711 Distinguished Name (DN) uniquely identifying the NE
+        neType:
+          type: string
+          description: Managed object class name (e.g., BTS, LNBTS, GNODEB)
+        technology:
+          type: string
+          enum:
+          - 2G
+          - 3G
+          - 4G
+          - 5G
+          - TRANSPORT
+          - CORE
+        vendor:
+          type: string
+        softwareVersion:
+          type: string
+        operationalState:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+          - UNKNOWN
+        administrativeState:
+          type: string
+          enum:
+          - LOCKED
+          - UNLOCKED
+          - SHUTTINGDOWN
+        alarmState:
+          type: string
+          enum:
+          - CLEAR
+          - WARNING
+          - MINOR
+          - MAJOR
+          - CRITICAL
+        ipAddress:
+          type: string
+          format: ipv4
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+            address:
+              type: string
+            siteId:
+              type: string
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Managed object attribute values
+    NetworkElementListResponse:
+      type: object
+      properties:
+        networkElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkElement'
+        totalCount:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+  responses:
+    NotFound:
+      description: Network element not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    BasicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Nokia NetAct Documentation
+  url: https://www.nokia.com/networks/products/netact/

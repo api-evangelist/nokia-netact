@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: Nokia NetAct Network Management Northbound Interface Configuration Management Fault Management API
+  description: Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.
+  version: 22.0.0
+  contact:
+    name: Nokia Networks Support
+    url: https://www.nokia.com/networks/support/
+  license:
+    name: Proprietary
+    url: https://www.nokia.com/
+servers:
+- url: https://{netact-host}/api/v1
+  variables:
+    netact-host:
+      default: netact.example.com
+      description: Nokia NetAct server hostname
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Fault Management
+  description: Alarm monitoring and lifecycle management
+paths:
+  /faults/alarms:
+    get:
+      operationId: listActiveAlarms
+      summary: List active alarms
+      description: Retrieve currently active alarms from managed network elements. Supports filtering by severity, network element, alarm type, and time range.
+      tags:
+      - Fault Management
+      parameters:
+      - name: severity
+        in: query
+        schema:
+          type: string
+          enum:
+          - CRITICAL
+          - MAJOR
+          - MINOR
+          - WARNING
+          - INDETERMINATE
+      - name: neDn
+        in: query
+        schema:
+          type: string
+        description: Distinguished Name of the source NE
+      - name: alarmType
+        in: query
+        schema:
+          type: string
+          enum:
+          - COMMUNICATION_ALARM
+          - EQUIPMENT_ALARM
+          - PROCESSING_ERROR
+          - QUALITY_OF_SERVICE
+          - ENVIRONMENTAL
+      - name: fromTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 200
+          maximum: 10000
+      responses:
+        '200':
+          description: Active alarms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlarmListResponse'
+  /faults/alarms/{alarmId}:
+    get:
+      operationId: getAlarm
+      summary: Get alarm details
+      description: Retrieve full details of a specific alarm by ID.
+      tags:
+      - Fault Management
+      parameters:
+      - name: alarmId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Alarm details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faults/alarms/{alarmId}/acknowledge:
+    post:
+      operationId: acknowledgeAlarm
+      summary: Acknowledge an alarm
+      description: Acknowledge an active alarm, optionally adding a comment.
+      tags:
+      - Fault Management
+      parameters:
+      - name: alarmId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  maxLength: 512
+                acknowledgedBy:
+                  type: string
+      responses:
+        '200':
+          description: Alarm acknowledged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+components:
+  responses:
+    NotFound:
+      description: Network element not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    AlarmListResponse:
+      type: object
+      properties:
+        alarms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alarm'
+        totalCount:
+          type: integer
+    Alarm:
+      type: object
+      properties:
+        alarmId:
+          type: string
+        neDn:
+          type: string
+          description: DN of the source network element
+        severity:
+          type: string
+          enum:
+          - CRITICAL
+          - MAJOR
+          - MINOR
+          - WARNING
+          - INDETERMINATE
+          - CLEARED
+        alarmType:
+          type: string
+          enum:
+          - COMMUNICATION_ALARM
+          - EQUIPMENT_ALARM
+          - PROCESSING_ERROR
+          - QUALITY_OF_SERVICE
+          - ENVIRONMENTAL
+        probableCause:
+          type: integer
+          description: X.733 probable cause code
+        specificProblem:
+          type: string
+          description: Vendor-specific problem description
+        additionalText:
+          type: string
+        raisedTime:
+          type: string
+          format: date-time
+        clearedTime:
+          type: string
+          format: date-time
+        acknowledgedTime:
+          type: string
+          format: date-time
+        acknowledgedBy:
+          type: string
+        technology:
+          type: string
+          enum:
+          - 2G
+          - 3G
+          - 4G
+          - 5G
+          - TRANSPORT
+          - CORE
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    BasicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Nokia NetAct Documentation
+  url: https://www.nokia.com/networks/products/netact/

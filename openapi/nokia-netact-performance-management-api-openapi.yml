@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: Nokia NetAct Network Management Northbound Interface Configuration Management Performance Management API
+  description: Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.
+  version: 22.0.0
+  contact:
+    name: Nokia Networks Support
+    url: https://www.nokia.com/networks/support/
+  license:
+    name: Proprietary
+    url: https://www.nokia.com/
+servers:
+- url: https://{netact-host}/api/v1
+  variables:
+    netact-host:
+      default: netact.example.com
+      description: Nokia NetAct server hostname
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Performance Management
+  description: KPI and PM counter retrieval
+paths:
+  /performance/kpis:
+    get:
+      operationId: getPerformanceKPIs
+      summary: Get KPI performance counters
+      description: Retrieve performance measurement (PM) counter values and derived KPIs for network elements. Supports filtering by NE, KPI group, and time granularity (15-min, 1-hour, daily).
+      tags:
+      - Performance Management
+      parameters:
+      - name: neDn
+        in: query
+        required: true
+        schema:
+          type: string
+        description: DN of the network element or subtree root
+      - name: kpiGroup
+        in: query
+        schema:
+          type: string
+        description: KPI group name (e.g., ACCESSIBILITY, RETAINABILITY, TRAFFIC)
+      - name: granularity
+        in: query
+        schema:
+          type: string
+          enum:
+          - PT15M
+          - PT1H
+          - P1D
+          default: PT1H
+        description: Measurement granularity (ISO 8601 duration)
+      - name: startTime
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: endTime
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: KPI measurement results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KPIResultResponse'
+components:
+  schemas:
+    KPIResultResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/KPIResult'
+        queryStartTime:
+          type: string
+          format: date-time
+        queryEndTime:
+          type: string
+          format: date-time
+    KPIResult:
+      type: object
+      properties:
+        neDn:
+          type: string
+        kpiName:
+          type: string
+        kpiGroup:
+          type: string
+        granularity:
+          type: string
+        measurements:
+          type: array
+          items:
+            type: object
+            properties:
+              startTime:
+                type: string
+                format: date-time
+              endTime:
+                type: string
+                format: date-time
+              value:
+                type: number
+              unit:
+                type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    BasicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Nokia NetAct Documentation
+  url: https://www.nokia.com/networks/products/netact/
