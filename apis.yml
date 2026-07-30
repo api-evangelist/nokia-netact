@@ -5,7 +5,20 @@ description: >-
   mobile networks across radio, transport, and core domains. The northbound interface exposes REST APIs for OSS/BSS
   integration including topology, performance, fault, and configuration management.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nokia-netact.png
 tags:
   - Network Management
   - OSS
@@ -16,31 +29,78 @@ created: '2026-03-18'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: nokia-netact:nokia-netact-api
-    name: Nokia NetAct / Ericsson OSS API
-    description: >-
-      Nokia NetAct and Ericsson OSS provide network element management APIs for telecom operators. APIs enable network
-      topology discovery, performance monitoring, fault management, and configuration management across RAN, transport,
-      and core network infrastructure.
-    humanURL: https://www.nokia.com/
-    baseURL: https://api.nokia-netact.example.com
-    tags:
-      - Network Management
-      - OSS
-      - SNMP
-      - Telecom
-    properties:
-      - type: Documentation
-        url: https://www.nokia.com/networks/products/netact/
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/openapi/nokia-netact-nbi-openapi.yml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
-      - type: JSONLDContext
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
+- aid: nokia-netact:nokia-netact-configuration-management-api
+  name: Nokia NetAct Configuration Management API
+  description: Network element configuration read and write
+  humanURL: https://www.nokia.com/
+  baseURL: https://api.nokia-netact.example.com
+  tags:
+  - Configuration Management
+  properties:
+  - type: OpenAPI
+    url: openapi/nokia-netact-configuration-management-api-openapi.yml
+  - type: Documentation
+    url: https://www.nokia.com/networks/products/netact/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
+- aid: nokia-netact:nokia-netact-fault-management-api
+  name: Nokia NetAct Fault Management API
+  description: Alarm monitoring and lifecycle management
+  humanURL: https://www.nokia.com/
+  baseURL: https://api.nokia-netact.example.com
+  tags:
+  - Fault Management
+  properties:
+  - type: OpenAPI
+    url: openapi/nokia-netact-fault-management-api-openapi.yml
+  - type: Documentation
+    url: https://www.nokia.com/networks/products/netact/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
+- aid: nokia-netact:nokia-netact-performance-management-api
+  name: Nokia NetAct Performance Management API
+  description: KPI and PM counter retrieval
+  humanURL: https://www.nokia.com/
+  baseURL: https://api.nokia-netact.example.com
+  tags:
+  - Performance Management
+  properties:
+  - type: OpenAPI
+    url: openapi/nokia-netact-performance-management-api-openapi.yml
+  - type: Documentation
+    url: https://www.nokia.com/networks/products/netact/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
+- aid: nokia-netact:nokia-netact-topology-api
+  name: Nokia NetAct Topology API
+  description: Network topology discovery and navigation
+  humanURL: https://www.nokia.com/
+  baseURL: https://api.nokia-netact.example.com
+  tags:
+  - Topology
+  properties:
+  - type: OpenAPI
+    url: openapi/nokia-netact-topology-api-openapi.yml
+  - type: Documentation
+    url: https://www.nokia.com/networks/products/netact/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/nokia-netact-agentic-access.yml
