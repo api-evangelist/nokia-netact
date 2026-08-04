@@ -1,0 +1,20 @@
+{
+  "provider": "nokia-netact",
+  "sources": [
+    "nokia-netact-configuration-management-api-openapi.yml",
+    "nokia-netact-fault-management-api-openapi.yml",
+    "nokia-netact-performance-management-api-openapi.yml",
+    "nokia-netact-topology-api-openapi.yml"
+  ],
+  "outputs": [
+    "nokia-netact-configuration-management-api-openapi.yml",
+    "nokia-netact-fault-management-api-openapi.yml",
+    "nokia-netact-performance-management-api-openapi.yml",
+    "nokia-netact-topology-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
