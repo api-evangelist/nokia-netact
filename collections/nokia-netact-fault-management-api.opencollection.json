@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nokia NetAct Network Management Northbound Interface Configuration Management Fault Management API",
+    "version": "22.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fault Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List active alarms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/faults/alarms",
+            "params": [
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "neDn",
+                "value": "",
+                "type": "query",
+                "description": "Distinguished Name of the source NE"
+              },
+              {
+                "name": "alarmType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve currently active alarms from managed network elements. Supports filtering by severity, network element, alarm type, and time range."
+        },
+        {
+          "info": {
+            "name": "Get alarm details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/faults/alarms/:alarmId",
+            "params": [
+              {
+                "name": "alarmId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve full details of a specific alarm by ID."
+        },
+        {
+          "info": {
+            "name": "Acknowledge an alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{netact-host}/api/v1/faults/alarms/:alarmId/acknowledge",
+            "params": [
+              {
+                "name": "alarmId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge an active alarm, optionally adding a comment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

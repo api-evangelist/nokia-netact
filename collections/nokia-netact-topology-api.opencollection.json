@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nokia NetAct Network Management Northbound Interface Configuration Management Topology API",
+    "version": "22.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Topology",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List network elements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/topology/network-elements",
+            "params": [
+              {
+                "name": "neType",
+                "value": "",
+                "type": "query",
+                "description": "Network element type (e.g., BTS, NodeB, eNodeB, gNodeB, BSC, RNC, MSC)"
+              },
+              {
+                "name": "technology",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "vendor",
+                "value": "",
+                "type": "query",
+                "description": "Network equipment vendor name"
+              },
+              {
+                "name": "operationalState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "administrativeState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "alarmState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dnFilter",
+                "value": "",
+                "type": "query",
+                "description": "Distinguished Name prefix filter for topology subtree queries"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of managed network elements (NEs) including base stations, radio units, core nodes, and transport equipment. Supports filtering by element type, vendor, technology, and operational state."
+        },
+        {
+          "info": {
+            "name": "Get network element details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/topology/network-elements/:distinguishedName",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "PLMN-PLMN/BSC-1/BTS-100",
+                "type": "path",
+                "description": "DN of the network element (URL-encoded)"
+              }
+            ]
+          },
+          "docs": "Retrieve full details of a specific network element by its Distinguished Name (DN) including managed object attributes, alarms, and KPI summary."
+        },
+        {
+          "info": {
+            "name": "Get child network elements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/topology/network-elements/:distinguishedName/children",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "childClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific MO class name (e.g., LNCEL, WCEL, GCELL)"
+              }
+            ]
+          },
+          "docs": "Retrieve the direct children of a network element in the managed object tree (e.g., cells under a base station, boards under an NE)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

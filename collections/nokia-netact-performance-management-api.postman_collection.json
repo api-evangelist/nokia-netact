@@ -1,0 +1,196 @@
+{
+  "item": [
+    {
+      "id": "a17717ca-1815-4323-93be-381b75221908",
+      "name": "Performance Management",
+      "description": {
+        "content": "KPI and PM counter retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4184fff1-dd06-4cd0-86da-01b67d705dbf",
+          "name": "Get KPI performance counters",
+          "request": {
+            "name": "Get KPI performance counters",
+            "description": {
+              "content": "Retrieve performance measurement (PM) counter values and derived KPIs for network elements. Supports filtering by NE, KPI group, and time granularity (15-min, 1-hour, daily).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "performance",
+                "kpis"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "neDn",
+                  "value": "<string>",
+                  "description": "(Required) DN of the network element or subtree root"
+                },
+                {
+                  "disabled": false,
+                  "key": "kpiGroup",
+                  "value": "<string>",
+                  "description": "KPI group name (e.g., ACCESSIBILITY, RETAINABILITY, TRAFFIC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "PT1H",
+                  "description": "Measurement granularity (ISO 8601 duration)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "686b4d80-76bd-4ce7-8c7e-5351d7db88dd",
+              "name": "KPI measurement results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "performance",
+                    "kpis"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "neDn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kpiGroup",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "PT1H"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"neDn\": \"string\",\n      \"kpiName\": \"string\",\n      \"kpiGroup\": \"string\",\n      \"granularity\": \"string\",\n      \"measurements\": [\n        {\n          \"startTime\": \"1963-06-01T20:12:45.258Z\",\n          \"endTime\": \"1995-03-01T10:21:45.043Z\",\n          \"value\": 730.0342096250989,\n          \"unit\": \"string\"\n        },\n        {\n          \"startTime\": \"1995-07-08T10:39:02.155Z\",\n          \"endTime\": \"1993-12-09T07:08:10.724Z\",\n          \"value\": 6319.405657491052,\n          \"unit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"neDn\": \"string\",\n      \"kpiName\": \"string\",\n      \"kpiGroup\": \"string\",\n      \"granularity\": \"string\",\n      \"measurements\": [\n        {\n          \"startTime\": \"1949-12-16T23:08:58.154Z\",\n          \"endTime\": \"1994-04-10T09:24:02.912Z\",\n          \"value\": 8243.30303325855,\n          \"unit\": \"string\"\n        },\n        {\n          \"startTime\": \"2006-02-09T08:47:07.607Z\",\n          \"endTime\": \"1981-09-16T17:52:49.458Z\",\n          \"value\": 1441.1758947193798,\n          \"unit\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"queryStartTime\": \"1973-06-16T06:26:46.419Z\",\n  \"queryEndTime\": \"2022-02-06T07:30:33.477Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Nokia NetAct server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "netact.example.com",
+      "key": "netact-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{netact-host}}/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "314bba9b-9588-4f06-8a50-f6bf34653747",
+    "name": "Nokia NetAct Network Management Northbound Interface Configuration Management Performance Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.\n\nContact Support:\n Name: Nokia Networks Support",
+      "type": "text/plain"
+    }
+  }
+}

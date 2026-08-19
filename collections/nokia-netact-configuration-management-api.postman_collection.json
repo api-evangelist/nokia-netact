@@ -1,0 +1,375 @@
+{
+  "item": [
+    {
+      "id": "2ae6afd3-f838-48fc-aba6-99ad43878495",
+      "name": "Configuration Management",
+      "description": {
+        "content": "Network element configuration read and write",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1fdb9d28-d8c4-463b-85cc-bc6b5e6c6284",
+          "name": "Get managed object attributes",
+          "request": {
+            "name": "Get managed object attributes",
+            "description": {
+              "content": "Read current configuration parameter values (MO attributes) for a network element. Used for configuration verification and auditing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "configuration",
+                "network-elements",
+                ":distinguishedName",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to retrieve (all if omitted)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distinguishedName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f2d39d3-94a8-4bba-84c2-dc41a64e77e5",
+              "name": "MO attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configuration",
+                    "network-elements",
+                    ":distinguishedName",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"distinguishedName\": \"string\",\n  \"attributes\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a89af72-53d9-49dc-ae99-d05547cf3b0b",
+          "name": "Modify managed object attributes",
+          "request": {
+            "name": "Modify managed object attributes",
+            "description": {
+              "content": "Apply configuration changes to a network element by modifying MO attributes. All changes are logged in the NetAct audit trail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "configuration",
+                "network-elements",
+                ":distinguishedName",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distinguishedName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Nokia NetAct server hostname",
+                  "type": "any",
+                  "value": "{{netact-host}}",
+                  "key": "netact-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributes\": {\n    \"key_0\": 158,\n    \"key_1\": \"string\"\n  },\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c2ea4eca-a278-497e-9060-4b6d2b574dbd",
+              "name": "Attributes updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configuration",
+                    "network-elements",
+                    ":distinguishedName",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": 9806,\n    \"key_1\": 6880.303522074147\n  },\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"distinguishedName\": \"string\",\n  \"attributes\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6fe9511-5737-472f-9e15-7ef2b9cf1d3e",
+              "name": "Conflict — NE locked by another session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configuration",
+                    "network-elements",
+                    ":distinguishedName",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distinguishedName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Nokia NetAct server hostname",
+                      "type": "any",
+                      "value": "{{netact-host}}",
+                      "key": "netact-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"key_0\": 9806,\n    \"key_1\": 6880.303522074147\n  },\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Nokia NetAct server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "netact.example.com",
+      "key": "netact-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{netact-host}}/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f933c257-0de3-46c5-a5e8-5453a79802c3",
+    "name": "Nokia NetAct Network Management Northbound Interface Configuration Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.\n\nContact Support:\n Name: Nokia Networks Support",
+      "type": "text/plain"
+    }
+  }
+}

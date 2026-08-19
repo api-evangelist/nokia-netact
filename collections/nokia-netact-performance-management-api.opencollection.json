@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nokia NetAct Network Management Northbound Interface Configuration Management Performance Management API",
+    "version": "22.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Performance Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get KPI performance counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/performance/kpis",
+            "params": [
+              {
+                "name": "neDn",
+                "value": "",
+                "type": "query",
+                "description": "DN of the network element or subtree root"
+              },
+              {
+                "name": "kpiGroup",
+                "value": "",
+                "type": "query",
+                "description": "KPI group name (e.g., ACCESSIBILITY, RETAINABILITY, TRAFFIC)"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Measurement granularity (ISO 8601 duration)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve performance measurement (PM) counter values and derived KPIs for network elements. Supports filtering by NE, KPI group, and time granularity (15-min, 1-hour, daily)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

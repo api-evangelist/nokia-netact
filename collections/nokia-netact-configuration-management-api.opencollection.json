@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nokia NetAct Network Management Northbound Interface Configuration Management API",
+    "version": "22.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get managed object attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{netact-host}/api/v1/configuration/network-elements/:distinguishedName/attributes",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to retrieve (all if omitted)"
+              }
+            ]
+          },
+          "docs": "Read current configuration parameter values (MO attributes) for a network element. Used for configuration verification and auditing."
+        },
+        {
+          "info": {
+            "name": "Modify managed object attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{netact-host}/api/v1/configuration/network-elements/:distinguishedName/attributes",
+            "params": [
+              {
+                "name": "distinguishedName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply configuration changes to a network element by modifying MO attributes. All changes are logged in the NetAct audit trail."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
