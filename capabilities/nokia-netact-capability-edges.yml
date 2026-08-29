@@ -1,0 +1,53 @@
+slug: nokia-netact
+provider: Nokia NetAct
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Configuration Management
+  spec_file: nokia-netact-configuration-management-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.95
+  evidence: PATCH /configuration/network-elements/{distinguishedName}/attributes  updateNetworkElementAttributes  Modify
+    managed object attributes
+  reason: Reads and modifies managed-object attributes on network elements across RAN, transport and core
+    — textbook network element configuration management.
+- tag: Fault Management
+  spec_file: nokia-netact-fault-management-api-openapi.yml
+  capability_id: BC-2600.10
+  capability_id_l1: BC-2600
+  capability_name: Network Fault Management
+  confidence: 0.95
+  evidence: GET /faults/alarms  listActiveAlarms; POST /faults/alarms/{alarmId}/acknowledge  Acknowledge
+    an alarm
+  reason: Active network alarm listing, detail retrieval and acknowledgement from a multi-vendor network
+    management system — network fault detection and handling, not business alerting.
+- tag: Performance Management
+  spec_file: nokia-netact-performance-management-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.95
+  evidence: GET /performance/kpis  getPerformanceKPIs  Get KPI performance counters (KPIResult)
+  reason: Exposure of network performance counters/KPIs from network elements — network performance management.
+- tag: Topology
+  spec_file: nokia-netact-topology-api-openapi.yml
+  capability_id: BC-2600.40
+  capability_id_l1: BC-2600
+  capability_name: Network Inventory Management
+  confidence: 0.85
+  evidence: GET /topology/network-elements  listNetworkElements; getNetworkElementChildren  Get child
+    network elements
+  reason: Authoritative listing and hierarchical relationships of network elements (topology discovery)
+    — the network resource inventory record.

@@ -115,6 +115,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/nokia-netact-capability-edges.yml
+    name: Nokia NetAct Business Capability Map
   - type: AgenticAccess
     url: agentic-access/nokia-netact-agentic-access.yml
   - type: VulnerabilityDisclosure
