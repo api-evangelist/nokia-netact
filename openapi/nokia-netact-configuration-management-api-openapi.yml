@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nokia NetAct Network Management Northbound Interface Configuration Management API
+  title: Nokia NetAct Network Management Northbound Interface…
   description: Nokia NetAct provides network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure. The NBI (Northbound Interface) exposes REST APIs for OSS/BSS integration.
   version: 22.0.0
   contact:
@@ -92,15 +92,6 @@ components:
         reason:
           type: string
           description: Change reason for audit trail
-    MOAttributesResponse:
-      type: object
-      properties:
-        distinguishedName:
-          type: string
-        attributes:
-          type: object
-          additionalProperties: true
-          description: MO attribute name-value pairs
     ErrorResponse:
       type: object
       properties:
@@ -110,6 +101,15 @@ components:
           type: string
         details:
           type: string
+    MOAttributesResponse:
+      type: object
+      properties:
+        distinguishedName:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+          description: MO attribute name-value pairs
   securitySchemes:
     BearerAuth:
       type: http

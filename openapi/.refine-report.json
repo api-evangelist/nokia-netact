@@ -1,10 +1,7 @@
 {
   "provider": "nokia-netact",
   "sources": [
-    "nokia-netact-configuration-management-api-openapi.yml",
-    "nokia-netact-fault-management-api-openapi.yml",
-    "nokia-netact-performance-management-api-openapi.yml",
-    "nokia-netact-topology-api-openapi.yml"
+    "_original/nokia-netact-nbi-openapi.yml"
   ],
   "outputs": [
     "nokia-netact-configuration-management-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nokia-netact-nbi-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "nokia-netact-configuration-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nokia-netact-fault-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nokia-netact-performance-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nokia-netact-topology-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
