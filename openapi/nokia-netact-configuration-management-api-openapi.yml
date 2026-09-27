@@ -92,15 +92,6 @@ components:
         reason:
           type: string
           description: Change reason for audit trail
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
     MOAttributesResponse:
       type: object
       properties:
@@ -110,6 +101,15 @@ components:
           type: object
           additionalProperties: true
           description: MO attribute name-value pairs
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

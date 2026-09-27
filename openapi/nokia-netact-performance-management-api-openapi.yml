@@ -72,19 +72,6 @@ paths:
                 $ref: '#/components/schemas/KPIResultResponse'
 components:
   schemas:
-    KPIResultResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/KPIResult'
-        queryStartTime:
-          type: string
-          format: date-time
-        queryEndTime:
-          type: string
-          format: date-time
     KPIResult:
       type: object
       properties:
@@ -111,6 +98,19 @@ components:
                 type: number
               unit:
                 type: string
+    KPIResultResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/KPIResult'
+        queryStartTime:
+          type: string
+          format: date-time
+        queryEndTime:
+          type: string
+          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

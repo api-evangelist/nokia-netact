@@ -36,6 +36,11 @@ tags:
   - Network Management
   - OSS
   - SNMP
+  - Telecommunications
+tags_raw:
+  - Network Management
+  - OSS
+  - SNMP
   - Telecom
 url: https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/apis.yml
 created: '2026-03-18'
@@ -142,3 +147,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-parent: nokia-corp
+x-relationship: product
