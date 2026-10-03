@@ -153,6 +153,15 @@ paths:
                 $ref: '#/components/schemas/NetworkElementListResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
     NetworkElementListResponse:
       type: object
       properties:
@@ -227,24 +236,15 @@ components:
           type: object
           additionalProperties: true
           description: Managed object attribute values
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
   responses:
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Network element not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Network element not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:

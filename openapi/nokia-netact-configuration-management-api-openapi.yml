@@ -80,6 +80,15 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
     MOAttributeUpdate:
       type: object
       required:
@@ -101,15 +110,6 @@ components:
           type: object
           additionalProperties: true
           description: MO attribute name-value pairs
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

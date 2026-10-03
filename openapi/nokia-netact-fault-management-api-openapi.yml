@@ -128,15 +128,15 @@ paths:
                 $ref: '#/components/schemas/Alarm'
 components:
   schemas:
-    AlarmListResponse:
+    ErrorResponse:
       type: object
       properties:
-        alarms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Alarm'
-        totalCount:
-          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
     Alarm:
       type: object
       properties:
@@ -190,15 +190,15 @@ components:
           - 5G
           - TRANSPORT
           - CORE
-    ErrorResponse:
+    AlarmListResponse:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        details:
-          type: string
+        alarms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alarm'
+        totalCount:
+          type: integer
   responses:
     NotFound:
       description: Network element not found
