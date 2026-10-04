@@ -80,6 +80,15 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    MOAttributesResponse:
+      type: object
+      properties:
+        distinguishedName:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+          description: MO attribute name-value pairs
     ErrorResponse:
       type: object
       properties:
@@ -101,15 +110,6 @@ components:
         reason:
           type: string
           description: Change reason for audit trail
-    MOAttributesResponse:
-      type: object
-      properties:
-        distinguishedName:
-          type: string
-        attributes:
-          type: object
-          additionalProperties: true
-          description: MO attribute name-value pairs
   securitySchemes:
     BearerAuth:
       type: http
