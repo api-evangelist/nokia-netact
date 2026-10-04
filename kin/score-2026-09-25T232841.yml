@@ -1,21 +1,19 @@
-# Kin Score artifact — nokia-netact — 2026-08-30T220315
+# Kin Score artifact — nokia-netact — 2026-09-25T232841
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: nokia-netact
-  schema_version: 0.17.2
-  scored_at: '2026-08-30'
-  run_ts: 2026-08-30T220315
-  composite: 33.9
+  schema_version: 0.23.0
+  scored_at: '2026-09-25'
+  run_ts: 2026-09-25T232841
+  composite: 31.0
   band: thin
   facets:
-    discoverability: 59.3
-    contract_quality: 64.2
-    governance: 9.8
+    discoverability: 57.1
+    contract_quality: 58.5
+    contract_governance: 9.8
     operational_transparency: 7.9
     developer_ergonomics: 31.0
-    commercial_clarity: 15.8
-    contract_governance: 9.8
     access_clarity: 15.8
   agent_readiness:
     score: 22.3
@@ -44,7 +42,7 @@ kin_score:
     applies: true
     regime: Telecommunications
     regime_id: telecommunications
-    score: 31.9
+    score: 19.2
     matched_via: tags
   provenance:
     agentic_access: derived
