@@ -135,15 +135,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    AlarmListResponse:
-      type: object
-      properties:
-        alarms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Alarm'
-        totalCount:
-          type: integer
     Alarm:
       type: object
       properties:
@@ -197,6 +188,15 @@ components:
           - 5G
           - TRANSPORT
           - CORE
+    AlarmListResponse:
+      type: object
+      properties:
+        alarms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alarm'
+        totalCount:
+          type: integer
     ErrorResponse:
       type: object
       properties:
