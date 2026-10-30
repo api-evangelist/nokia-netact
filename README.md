@@ -1,4 +1,4 @@
-# Nokia NetAct (nokia-netact)
+# Nokia NetAct
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,59 +66,139 @@
 
 Nokia NetAct is a network management system that enables operators to monitor, configure, and optimize multi-vendor mobile networks across radio, transport, and core domains. The northbound interface exposes REST APIs for OSS/BSS integration including topology, performance, fault, and configuration management.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/apis.yml)
+**Areas:** Network Management · OSS · SNMP · Telecommunications
 
-## Scope
+## Nokia NetAct on APIs.io
 
-- **Type:** Index
+Everything profiled for Nokia NetAct is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nokia-netact/](https://apis.io/providers/nokia-netact/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- Network Management
-- OSS
-- SNMP
-- Telecom
+- [Nokia NetAct Configuration Management API](https://apis.io/apis/nokia-netact/nokia-netact-configuration-management-api/) — Network element configuration read and write
+- [Nokia NetAct Fault Management API](https://apis.io/apis/nokia-netact/nokia-netact-fault-management-api/) — Alarm monitoring and lifecycle management
+- [Nokia NetAct Performance Management API](https://apis.io/apis/nokia-netact/nokia-netact-performance-management-api/) — KPI and PM counter retrieval
+- [Nokia NetAct Topology API](https://apis.io/apis/nokia-netact/nokia-netact-topology-api/) — Network topology discovery and navigation
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-18
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Nokia NetAct / Ericsson OSS API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Nokia NetAct and Ericsson OSS provide network element management APIs for telecom operators. APIs enable network topology discovery, performance monitoring, fault management, and configuration management across RAN, transport, and core network infrastructure.
+- [Nokia Netact Agentic Access](https://apis.io/agentic-access/nokia-netact/nokia-netact-agentic-access/)
 
-- **Human URL:** [https://www.nokia.com/](https://www.nokia.com/)
-- **Base URL:** `https://api.nokia-netact.example.com`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Network Management
-- OSS
-- SNMP
-- Telecom
+- [Nokia NetAct Network Element](https://apis.io/schemas/nokia-netact/nokia-netact-network-element/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://www.nokia.com/networks/products/netact/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/openapi/nokia-netact-nbi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld)
-- [Postman Collection](collections/nokia-netact-nbi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nokia-netact-nbi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Linked-data contexts for the provider's vocabulary.
 
-## Common Properties
+- [Nokia Netact Context](https://apis.io/jsonld/nokia-netact/nokia-netact-context/)
 
-- [Portal](https://www.nokia.com/)
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Nokia NetAct Network Management Northbound Interface Configuration Management API](https://apis.io/collections/nokia-netact/open-nokia-netact-configuration-management-api/)
+- [Nokia NetAct Network Management Northbound Interface Configuration Management Fault Management API](https://apis.io/collections/nokia-netact/open-nokia-netact-fault-management-api/)
+- [Nokia NetAct Network Management Northbound Interface API](https://apis.io/collections/nokia-netact/open-nokia-netact-nbi/)
+- [Nokia NetAct Network Management Northbound Interface Configuration Management Performance Management API](https://apis.io/collections/nokia-netact/open-nokia-netact-performance-management-api/)
+- [Nokia NetAct Network Management Northbound Interface Configuration Management Topology API](https://apis.io/collections/nokia-netact/open-nokia-netact-topology-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Nokia NetAct — jsonschema rules](https://apis.io/rules/nokia-netact/nokia-netact-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Nokia Netact Authentication](https://apis.io/security/nokia-netact/nokia-netact-authentication/)
+- [Nokia Netact Domain Security](https://apis.io/security/nokia-netact/nokia-netact-domain-security/)
+- [Nokia Netact Vulnerability Disclosure](https://apis.io/security/nokia-netact/nokia-netact-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Nokia Netact Plans Pricing](https://apis.io/plans/nokia-netact/nokia-netact-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Nokia Netact Rate Limits](https://apis.io/rate-limits/nokia-netact/nokia-netact-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Nokia Netact Finops](https://apis.io/finops/nokia-netact/nokia-netact-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.nokia.com/)
 - [Documentation](https://www.nokia.com/networks/products/netact/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/openapi/nokia-netact-nbi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-schema/nokia-netact-network-element-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/nokia-netact/refs/heads/main/json-ld/nokia-netact-context.jsonld)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 58.5 |
+| Contract governance | 9.8 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 19.2** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nokia-netact/](https://apis.io/providers/nokia-netact/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Nokia NetAct: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nokia-netact/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
